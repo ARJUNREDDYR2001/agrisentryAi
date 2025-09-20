@@ -3,6 +3,7 @@
   "appTagline": "आपका जलवायु-जागरूक कृषि संरक्षक",
   "diagnosis": "निदान",
   "preventiveGuidance": "निवारक मार्गदर्शन",
+  "pestForecast": "पूर्वानुमान",
   "diseaseDiagnosis": "रोग निदान",
   "diseaseDiagnosisDescription": "एआई-संचालित निदान प्राप्त करने के लिए प्रभावित पौधे की एक तस्वीर अपलोड करें।",
   "diagnosisFailed": "निदान विफल",
@@ -57,5 +58,13 @@
   "openChat": "चैट खोलें",
   "chatbotTitle": "एग्रीसेंट्री असिस्टेंट",
   "chatbotThinking": "सोच रहा है...",
-  "chatbotPlaceholder": "एक सवाल पूछो..."
+  "chatbotPlaceholder": "एक सवाल पूछो...",
+  "pestForecastTitle": "कीट और रोग पूर्वानुमान",
+  "pestForecastDescription": "फसल और मौसम के आधार पर संभावित प्रकोपों के लिए एआई-संचालित भविष्यवाणियां।",
+  "selectCrop": "अपनी फसल चुनें",
+  "getForecast": "पूर्वानुमान प्राप्त करें",
+  "forecastError": "पूर्वानुमान प्राप्त करने में विफल। कृपया बाद में पुन: प्रयास करें।",
+  "riskScore": "जोखिम स्कोर",
+  "recommendation": "सिफारिश",
+  "noSignificantRisks": "एआई विश्लेषण मौजूदा मौसम की स्थिति के तहत चयनित फसल के लिए कोई महत्वपूर्ण प्रकोप जोखिम नहीं दिखाता है।"
 }

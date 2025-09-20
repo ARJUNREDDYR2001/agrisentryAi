@@ -12,10 +12,11 @@ import DiagnosisForm from '@/components/agrisentry/diagnosis-form';
 import DiagnosisResultComponent from '@/components/agrisentry/diagnosis-result';
 import DiagnosisLoadingSkeleton from '@/components/agrisentry/diagnosis-loading-skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Leaf, Stethoscope } from 'lucide-react';
+import { Leaf, Stethoscope, Telescope } from 'lucide-react';
 import PreventiveGuidance from '@/components/agrisentry/preventive-guidance';
 import { useLocale } from '@/context/locale-context';
 import Chatbot from '@/components/agrisentry/chatbot';
+import PestForecast from '@/components/agrisentry/pest-forecast';
 
 
 type WeatherData = {
@@ -82,7 +83,7 @@ export default function AgriSentryDashboard() {
 
           <div className="md:col-span-2">
             <Tabs defaultValue="diagnosis" className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
+              <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="diagnosis">
                   <Stethoscope className="mr-2 h-4 w-4"/>
                   {t('diagnosis')}
@@ -90,6 +91,10 @@ export default function AgriSentryDashboard() {
                 <TabsTrigger value="prevention">
                   <Leaf className="mr-2 h-4 w-4"/>
                   {t('preventiveGuidance')}
+                </TabsTrigger>
+                <TabsTrigger value="forecast">
+                  <Telescope className="mr-2 h-4 w-4"/>
+                  {t('pestForecast')}
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="diagnosis">
@@ -112,6 +117,9 @@ export default function AgriSentryDashboard() {
               <TabsContent value="prevention">
                 <PreventiveGuidance weather={weather} />
               </TabsContent>
+              <TabsContent value="forecast">
+                <PestForecast weather={weather} />
+              </TabsContent>
             </Tabs>
           </div>
         </div>
@@ -123,4 +131,3 @@ export default function AgriSentryDashboard() {
     </div>
   );
 }
-

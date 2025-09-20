@@ -3,6 +3,7 @@
   "appTagline": "మీ వాతావరణ-అవగాహన గల వ్యవసాయ సంరక్షకుడు",
   "diagnosis": "రోగ నిర్ధారణ",
   "preventiveGuidance": "నివారణ మార్గదర్శకం",
+  "pestForecast": "సూచన",
   "diseaseDiagnosis": "వ్యాధి నిర్ధారణ",
   "diseaseDiagnosisDescription": "AI-ఆధారిత రోగ నిర్ధారణను పొందడానికి ప్రభావిత మొక్క యొక్క ఫోటోను అప్‌లోడ్ చేయండి.",
   "diagnosisFailed": "రోగ నిర్ధారణ విఫలమైంది",
@@ -57,5 +58,13 @@
   "openChat": "చాట్ తెరవండి",
   "chatbotTitle": "అగ్రిసెంట్రీ అసిస్టెంట్",
   "chatbotThinking": "ఆలోచిస్తోంది...",
-  "chatbotPlaceholder": "ప్రశ్న అడగండి..."
+  "chatbotPlaceholder": "ప్రశ్న అడగండి...",
+  "pestForecastTitle": "పురుగు మరియు వ్యాధి సూచన",
+  "pestForecastDescription": "పంట మరియు వాతావరణం ఆధారంగా సంభావ్య వ్యాప్తి కోసం AI-ఆధారిత అంచనాలు.",
+  "selectCrop": "మీ పంటను ఎంచుకోండి",
+  "getForecast": "సూచనను పొందండి",
+  "forecastError": "సూచనను పొందడంలో విఫలమైంది. దయచేసి తర్వాత మళ్లీ ప్రయత్నించండి.",
+  "riskScore": "ప్రమాద స్కోరు",
+  "recommendation": "సిఫార్సు",
+  "noSignificantRisks": "ప్రస్తుత వాతావరణ పరిస్థితులలో ఎంచుకున్న పంటకు AI విశ్లేషణ ఎటువంటి ముఖ్యమైన వ్యాప్తి ప్రమాదాలను చూపలేదు."
 }

@@ -3,6 +3,7 @@
   "appTagline": "तुमचा हवामान-जागरूक शेती संरक्षक",
   "diagnosis": "निदान",
   "preventiveGuidance": "प्रतिबंधात्मक मार्गदर्शन",
+  "pestForecast": "अंदाज",
   "diseaseDiagnosis": "रोग निदान",
   "diseaseDiagnosisDescription": "AI-चालित निदान मिळविण्यासाठी प्रभावित वनस्पतीच्या फोटो अपलोड करा.",
   "diagnosisFailed": "निदान अयशस्वी",
@@ -57,5 +58,13 @@
   "openChat": "चॅट उघडा",
   "chatbotTitle": "ऍग्रीसेंट्री सहाय्यक",
   "chatbotThinking": "विचार करत आहे...",
-  "chatbotPlaceholder": "प्रश्न विचारा..."
+  "chatbotPlaceholder": "प्रश्न विचारा...",
+  "pestForecastTitle": "कीटक आणि रोग अंदाज",
+  "pestForecastDescription": "पीक आणि हवामानावर आधारित संभाव्य प्रादुर्भावांसाठी AI-शक्तीवर आधारित अंदाज.",
+  "selectCrop": "तुमचे पीक निवडा",
+  "getForecast": "अंदाज मिळवा",
+  "forecastError": "अंदाज मिळवण्यात अयशस्वी. कृपया नंतर पुन्हा प्रयत्न करा.",
+  "riskScore": "धोका गुण",
+  "recommendation": "शिफारस",
+  "noSignificantRisks": "AI विश्लेषण सध्याच्या हवामान परिस्थितीत निवडलेल्या पिकासाठी कोणताही महत्त्वपूर्ण प्रादुर्भाव धोका दर्शवत नाही."
 }

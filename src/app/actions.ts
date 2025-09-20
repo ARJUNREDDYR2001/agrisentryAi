@@ -3,6 +3,7 @@
 import { diagnosePlantDisease, type DiagnosePlantDiseaseOutput } from '@/ai/flows/diagnose-plant-disease';
 import { textToSpeech } from '@/ai/flows/text-to-speech';
 import { farmerChat } from '@/ai/flows/farmer-chat';
+import { getPestAndDiseaseForecast, type PestAndDiseaseForecast } from '@/ai/flows/get-pest-disease-forecast';
 import { z } from 'zod';
 
 const diagnosisSchema = z.object({
@@ -78,5 +79,34 @@ export async function runChat(input: {
   } catch (e) {
     console.error(e);
     return { data: null, error: 'An unexpected error occurred in the chat. Please try again.' };
+  }
+}
+
+
+const forecastSchema = z.object({
+  temperature: z.coerce.number(),
+  humidity: z.coerce.number(),
+  rainForecast: z.string(),
+  crop: z.string(),
+});
+
+export async function runForecast(input: {
+  temperature: number;
+  humidity: number;
+  rainForecast: string;
+  crop: string;
+}): Promise<{ data: PestAndDiseaseForecast | null; error: string | null; }> {
+  const parsed = forecastSchema.safeParse(input);
+
+  if (!parsed.success) {
+    return { data: null, error: parsed.error.issues[0].message };
+  }
+  
+  try {
+    const result = await getPestAndDiseaseForecast(parsed.data);
+    return { data: result, error: null };
+  } catch (e) {
+    console.error(e);
+    return { data: null, error: 'An unexpected error occurred during forecast. Please try again.' };
   }
 }

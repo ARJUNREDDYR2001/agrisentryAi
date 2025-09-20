@@ -3,6 +3,7 @@
   "appTagline": "Your Climate-Aware Farm Guardian",
   "diagnosis": "Diagnosis",
   "preventiveGuidance": "Preventive Guidance",
+  "pestForecast": "Forecast",
   "diseaseDiagnosis": "Disease Diagnosis",
   "diseaseDiagnosisDescription": "Upload a photo of the affected plant to get an AI-powered diagnosis.",
   "diagnosisFailed": "Diagnosis Failed",
@@ -57,5 +58,13 @@
   "openChat": "Open Chat",
   "chatbotTitle": "AgriSentry Assistant",
   "chatbotThinking": "Thinking...",
-  "chatbotPlaceholder": "Ask a question..."
+  "chatbotPlaceholder": "Ask a question...",
+  "pestForecastTitle": "Pest & Disease Forecast",
+  "pestForecastDescription": "AI-powered predictions for potential outbreaks based on crop and weather.",
+  "selectCrop": "Select your crop",
+  "getForecast": "Get Forecast",
+  "forecastError": "Failed to get a forecast. Please try again later.",
+  "riskScore": "Risk Score",
+  "recommendation": "Recommendation",
+  "noSignificantRisks": "AI analysis shows no significant outbreak risks for the selected crop under current weather conditions."
 }
