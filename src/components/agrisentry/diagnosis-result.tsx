@@ -19,42 +19,20 @@ export default function DiagnosisResultComponent({ result, onReset }: DiagnosisR
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
-    const audioElement = audioRef.current;
-    if (result.audio && audioElement) {
-      audioElement.src = result.audio;
-      
-      const handleCanPlay = () => {
-        const playPromise = audioElement.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(error => {
-            console.error("Audio playback failed:", error);
-            // Autoplay was prevented. We might need a user interaction to play.
-            // For now, we log it. A user-clicked "play" button is a good fallback.
-          });
-        }
-      };
-      
-      audioElement.addEventListener('canplaythrough', handleCanPlay);
-
-      // Eagerly try to play, but rely on canplaythrough for reliability
-      const playPromise = audioElement.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          // This catch is important to handle cases where autoplay is blocked initially.
-          console.error("Initial audio playback attempt failed:", error);
+    // When a new result comes in, ensure the audio element is aware of the new source
+    if (result.audio && audioRef.current) {
+        audioRef.current.src = result.audio;
+        // The `autoPlay` attribute will handle the initial playback.
+        // We add a `.catch` to handle browsers that block autoplay.
+        audioRef.current.play().catch(error => {
+            console.warn("Autoplay was prevented by the browser.", error);
         });
-      }
-
-      return () => {
-        audioElement.removeEventListener('canplaythrough', handleCanPlay);
-        audioElement.pause();
-        audioElement.currentTime = 0;
-      };
     }
   }, [result.audio]);
 
   const playAudio = () => {
-    audioRef.current?.play().catch(e => console.error("Audio playback failed:", e));
+    // The user can always click to play.
+    audioRef.current?.play().catch(e => console.error("Audio playback failed on click:", e));
   }
 
   return (
@@ -113,7 +91,8 @@ export default function DiagnosisResultComponent({ result, onReset }: DiagnosisR
           Diagnose Another Plant
         </Button>
       </div>
-      {result.audio && <audio ref={audioRef} className="hidden" />}
+      {/* The autoPlay attribute is key for the initial playback. `controls` can be added for debugging. */}
+      {result.audio && <audio ref={audioRef} src={result.audio} autoPlay className="hidden" />}
     </div>
   );
 }
