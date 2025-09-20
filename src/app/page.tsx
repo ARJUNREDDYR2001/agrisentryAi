@@ -12,6 +12,10 @@ import DiseaseInfo from '@/components/agrisentry/disease-info';
 import DiagnosisForm from '@/components/agrisentry/diagnosis-form';
 import DiagnosisResult from '@/components/agrisentry/diagnosis-result';
 import DiagnosisLoadingSkeleton from '@/components/agrisentry/diagnosis-loading-skeleton';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Leaf, Stethoscope } from 'lucide-react';
+import PreventiveGuidance from '@/components/agrisentry/preventive-guidance';
+
 
 type WeatherData = {
   temperature: number;
@@ -72,21 +76,38 @@ export default function AgriSentryDashboard() {
           </div>
 
           <div className="md:col-span-2">
-            <Card className="h-full shadow-lg">
-              <CardHeader>
-                <CardTitle className="font-headline text-3xl text-primary">Disease Diagnosis</CardTitle>
-                <CardDescription>Upload a photo of the affected plant to get an AI-powered diagnosis.</CardDescription>
-              </CardHeader>
-              <CardContent className="min-h-[400px]">
-                {isLoading ? (
-                  <DiagnosisLoadingSkeleton />
-                ) : result ? (
-                  <DiagnosisResult result={result} onReset={handleReset} />
-                ) : (
-                  <DiagnosisForm onSubmit={handleSubmit} />
-                )}
-              </CardContent>
-            </Card>
+            <Tabs defaultValue="diagnosis" className="w-full">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="diagnosis">
+                  <Stethoscope className="mr-2 h-4 w-4"/>
+                  Diagnosis
+                </TabsTrigger>
+                <TabsTrigger value="prevention">
+                  <Leaf className="mr-2 h-4 w-4"/>
+                  Preventive Guidance
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="diagnosis">
+                <Card className="h-full shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="font-headline text-3xl text-primary">Disease Diagnosis</CardTitle>
+                    <CardDescription>Upload a photo of the affected plant to get an AI-powered diagnosis.</CardDescription>
+                  </CardHeader>
+                  <CardContent className="min-h-[400px]">
+                    {isLoading ? (
+                      <DiagnosisLoadingSkeleton />
+                    ) : result ? (
+                      <DiagnosisResult result={result} onReset={handleReset} />
+                    ) : (
+                      <DiagnosisForm onSubmit={handleSubmit} />
+                    )}
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              <TabsContent value="prevention">
+                <PreventiveGuidance weather={weather} />
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
       </main>
