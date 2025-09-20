@@ -88,13 +88,13 @@ export default function AgriSentryDashboard() {
                   <Stethoscope className="mr-2 h-4 w-4"/>
                   {t('diagnosis')}
                 </TabsTrigger>
-                <TabsTrigger value="prevention">
-                  <Leaf className="mr-2 h-4 w-4"/>
-                  {t('preventiveGuidance')}
-                </TabsTrigger>
                 <TabsTrigger value="forecast">
                   <Telescope className="mr-2 h-4 w-4"/>
                   {t('pestForecast')}
+                </TabsTrigger>
+                <TabsTrigger value="prevention">
+                  <Leaf className="mr-2 h-4 w-4"/>
+                  {t('preventiveGuidance')}
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="diagnosis">
@@ -114,11 +114,11 @@ export default function AgriSentryDashboard() {
                   </CardContent>
                 </Card>
               </TabsContent>
-              <TabsContent value="prevention">
-                <PreventiveGuidance weather={weather} />
-              </TabsContent>
               <TabsContent value="forecast">
                 <PestForecast weather={weather} />
+              </TabsContent>
+              <TabsContent value="prevention">
+                <PreventiveGuidance weather={weather} />
               </TabsContent>
             </Tabs>
           </div>
