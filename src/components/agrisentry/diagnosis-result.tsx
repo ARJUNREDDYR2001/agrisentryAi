@@ -19,16 +19,39 @@ export default function DiagnosisResultComponent({ result, onReset }: DiagnosisR
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
-    if (result.audio && audioRef.current) {
-      audioRef.current.src = result.audio;
-      const playPromise = audioRef.current.play();
+    const audioElement = audioRef.current;
+    if (result.audio && audioElement) {
+      audioElement.src = result.audio;
+      
+      const handleCanPlay = () => {
+        const playPromise = audioElement.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.error("Audio playback failed:", error);
+            // Autoplay was prevented. We might need a user interaction to play.
+            // For now, we log it. A user-clicked "play" button is a good fallback.
+          });
+        }
+      };
+      
+      audioElement.addEventListener('canplaythrough', handleCanPlay);
+
+      // Eagerly try to play, but rely on canplaythrough for reliability
+      const playPromise = audioElement.play();
       if (playPromise !== undefined) {
         playPromise.catch(error => {
-          console.error("Audio playback failed:", error);
+          // This catch is important to handle cases where autoplay is blocked initially.
+          console.error("Initial audio playback attempt failed:", error);
         });
       }
+
+      return () => {
+        audioElement.removeEventListener('canplaythrough', handleCanPlay);
+        audioElement.pause();
+        audioElement.currentTime = 0;
+      };
     }
-  }, [result]);
+  }, [result.audio]);
 
   const playAudio = () => {
     audioRef.current?.play().catch(e => console.error("Audio playback failed:", e));
