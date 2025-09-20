@@ -1,16 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import type { DiagnosePlantDiseaseOutput } from '@/ai/flows/diagnose-plant-disease';
 import { useToast } from "@/hooks/use-toast";
-import { runDiagnosis } from '@/app/actions';
+import { runDiagnosis, type DiagnosisResult } from '@/app/actions';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Header from '@/components/agrisentry/header';
 import WeatherWidget from '@/components/agrisentry/weather-widget';
 import DiseaseInfo from '@/components/agrisentry/disease-info';
 import DiagnosisForm from '@/components/agrisentry/diagnosis-form';
-import DiagnosisResult from '@/components/agrisentry/diagnosis-result';
+import DiagnosisResultComponent from '@/components/agrisentry/diagnosis-result';
 import DiagnosisLoadingSkeleton from '@/components/agrisentry/diagnosis-loading-skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Leaf, Stethoscope } from 'lucide-react';
@@ -24,7 +23,7 @@ type WeatherData = {
 };
 
 export default function AgriSentryDashboard() {
-  const [result, setResult] = useState<DiagnosePlantDiseaseOutput | null>(null);
+  const [result, setResult] = useState<DiagnosisResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [weather, setWeather] = useState<WeatherData>({ temperature: 0, humidity: 0, rainForecast: '' });
   const { toast } = useToast();
@@ -99,7 +98,7 @@ export default function AgriSentryDashboard() {
                     {isLoading ? (
                       <DiagnosisLoadingSkeleton />
                     ) : result ? (
-                      <DiagnosisResult result={result} onReset={handleReset} />
+                      <DiagnosisResultComponent result={result} onReset={handleReset} />
                     ) : (
                       <DiagnosisForm onSubmit={handleSubmit} />
                     )}

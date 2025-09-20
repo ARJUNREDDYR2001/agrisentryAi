@@ -1,27 +1,49 @@
 'use client';
 
-import type { DiagnosePlantDiseaseOutput } from '@/ai/flows/diagnose-plant-disease';
+import { useEffect, useRef } from 'react';
+import type { DiagnosisResult } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import AgroDealerModal from './agro-dealer-modal';
-import { AlertCircle, CheckCircle, RefreshCw } from 'lucide-react';
+import { AlertCircle, CheckCircle, RefreshCw, Volume2 } from 'lucide-react';
 
 type DiagnosisResultProps = {
-  result: DiagnosePlantDiseaseOutput;
+  result: DiagnosisResult;
   onReset: () => void;
 };
 
-export default function DiagnosisResult({ result, onReset }: DiagnosisResultProps) {
+export default function DiagnosisResultComponent({ result, onReset }: DiagnosisResultProps) {
   const confidenceColor = result.confidence > 70 ? 'bg-primary' : result.confidence > 40 ? 'bg-yellow-500' : 'bg-destructive';
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    if (result.audio && audioRef.current) {
+      audioRef.current.src = result.audio;
+      audioRef.current.play().catch(e => console.error("Audio playback failed:", e));
+    }
+  }, [result.audio]);
+
+  const playAudio = () => {
+    audioRef.current?.play().catch(e => console.error("Audio playback failed:", e));
+  }
 
   return (
     <div className="space-y-6">
       <Card className="bg-background/50 border-primary/50">
         <CardHeader>
-          <CardTitle className="font-headline text-2xl text-primary">{result.disease}</CardTitle>
-          <CardDescription>AI Diagnosis Result</CardDescription>
+          <div className="flex justify-between items-start">
+            <div>
+              <CardTitle className="font-headline text-2xl text-primary">{result.disease}</CardTitle>
+              <CardDescription>AI Diagnosis Result</CardDescription>
+            </div>
+            {result.audio && (
+              <Button variant="ghost" size="icon" onClick={playAudio} aria-label="Play diagnosis audio">
+                <Volume2 className="h-6 w-6 text-primary" />
+              </Button>
+            )}
+          </div>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
@@ -63,6 +85,7 @@ export default function DiagnosisResult({ result, onReset }: DiagnosisResultProp
           Diagnose Another Plant
         </Button>
       </div>
+      {result.audio && <audio ref={audioRef} className="hidden" />}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 'use server';
 
 import { diagnosePlantDisease, type DiagnosePlantDiseaseOutput } from '@/ai/flows/diagnose-plant-disease';
+import { textToSpeech } from '@/ai/flows/text-to-speech';
 import { z } from 'zod';
 
 const diagnosisSchema = z.object({
@@ -10,7 +11,9 @@ const diagnosisSchema = z.object({
   rainForecast: z.string(),
 });
 
-export async function runDiagnosis(formData: FormData): Promise<{data: DiagnosePlantDiseaseOutput | null; error: string | null;}> {
+export type DiagnosisResult = DiagnosePlantDiseaseOutput & { audio?: string };
+
+export async function runDiagnosis(formData: FormData): Promise<{data: DiagnosisResult | null; error: string | null;}> {
   const parsed = diagnosisSchema.safeParse({
     photo: formData.get('photo'),
     temperature: formData.get('temperature'),
@@ -29,14 +32,19 @@ export async function runDiagnosis(formData: FormData): Promise<{data: DiagnoseP
     const base64 = Buffer.from(buffer).toString('base64');
     const photoDataUri = `data:${photo.type};base64,${base64}`;
 
-    const result = await diagnosePlantDisease({
+    const diagnosisResult = await diagnosePlantDisease({
       photoDataUri,
       temperature,
       humidity,
       rainForecast,
     });
 
-    return { data: result, error: null };
+    const audioText = `Diagnosis: ${diagnosisResult.disease}. Advice: ${diagnosisResult.advice}. Insurance eligibility: ${diagnosisResult.insurance_eligible ? 'Eligible' : 'Not Eligible'}.`;
+
+    const audioResult = await textToSpeech(audioText);
+    
+    return { data: { ...diagnosisResult, audio: audioResult.media }, error: null };
+
   } catch (e) {
     console.error(e);
     return { data: null, error: 'An unexpected error occurred during diagnosis. Please try again later.' };
