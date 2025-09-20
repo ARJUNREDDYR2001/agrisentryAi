@@ -52,5 +52,9 @@
   "favorableConditions": "Favorable Conditions",
   "favorableConditionsDesc": "Current weather conditions are favorable. Continue standard monitoring and good farming practices. Stay vigilant for any changes in plant health.",
   "generalTip": "General Tip",
-  "generalTipDesc": "Always ensure your fields have good air circulation to reduce humidity on leaf surfaces, which discourages many fungal pathogens."
+  "generalTipDesc": "Always ensure your fields have good air circulation to reduce humidity on leaf surfaces, which discourages many fungal pathogens.",
+  "openChat": "Open Chat",
+  "chatbotTitle": "AgriSentry Assistant",
+  "chatbotThinking": "Thinking...",
+  "chatbotPlaceholder": "Ask a question..."
 }

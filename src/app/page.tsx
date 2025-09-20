@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Leaf, Stethoscope } from 'lucide-react';
 import PreventiveGuidance from '@/components/agrisentry/preventive-guidance';
 import { useLocale } from '@/context/locale-context';
+import Chatbot from '@/components/agrisentry/chatbot';
 
 
 type WeatherData = {
@@ -115,9 +116,11 @@ export default function AgriSentryDashboard() {
           </div>
         </div>
       </main>
+      <Chatbot />
       <footer className="text-center p-4 text-muted-foreground text-sm">
         <p>AgriSentryAI &copy; {new Date().getFullYear()} - {t('appTagline')}</p>
       </footer>
     </div>
   );
 }
+
