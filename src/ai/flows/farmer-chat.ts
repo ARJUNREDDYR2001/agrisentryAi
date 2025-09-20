@@ -29,10 +29,13 @@ export async function farmerChat(input: z.infer<typeof FarmerChatInputSchema>): 
     - Keep your answers concise, clear, and easy to understand for a non-technical audience.
     - If you don't know the answer, say so. Do not make up information.
     - Be friendly and encouraging.`;
+    
+    // Correctly combine history with the new question
+    const fullHistory = [...history, { role: 'user' as const, content: question }];
 
     const { output } = await ai.generate({
-        prompt: question,
-        history,
+        prompt: question, // The prompt is the latest question
+        history: history, // The history is the previous conversation
         system: systemPrompt,
     });
     
