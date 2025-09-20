@@ -30,9 +30,10 @@ export default function AgriSentryDashboard() {
   const { toast } = useToast();
 
   useEffect(() => {
+    // Simulate fetching weather data
     setWeather({
-      temperature: Math.floor(Math.random() * (35 - 25 + 1)) + 25,
-      humidity: Math.floor(Math.random() * (90 - 60 + 1)) + 60,
+      temperature: Math.floor(Math.random() * (35 - 25 + 1)) + 25, // Simulate temps between 25-35°C
+      humidity: Math.floor(Math.random() * (90 - 60 + 1)) + 60, // Simulate humidity between 60-90%
       rainForecast: ['No rain', 'Light showers expected', 'Chance of thunderstorms'][Math.floor(Math.random() * 3)],
     });
   }, []);
@@ -47,6 +48,7 @@ export default function AgriSentryDashboard() {
 
     setIsLoading(true);
     
+    // Append weather data to the form
     formData.append('temperature', weather.temperature.toString());
     formData.append('humidity', weather.humidity.toString());
     formData.append('rainForecast', weather.rainForecast);
