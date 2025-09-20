@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import AgroDealerModal from './agro-dealer-modal';
-import { AlertCircle, CheckCircle, RefreshCw, Volume2, MapPin } from 'lucide-react';
+import { AlertCircle, CheckCircle, RefreshCw, Volume2, VolumeX, MapPin } from 'lucide-react';
 import { useLocale } from '@/context/locale-context';
 
 type DiagnosisResultProps = {
@@ -20,22 +20,33 @@ export default function DiagnosisResultComponent({ result, onReset }: DiagnosisR
   const confidenceColor = result.confidence > 70 ? 'bg-primary' : result.confidence > 40 ? 'bg-yellow-500' : 'bg-destructive';
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
-    // When a new result comes in, ensure the audio element is aware of the new source
+    // When a new result comes in, set up the audio element
     if (result.audio && audioRef.current) {
-        audioRef.current.src = result.audio;
-        // The `autoPlay` attribute will handle the initial playback.
-        // We add a `.catch` to handle browsers that block autoplay.
-        audioRef.current.play().catch(error => {
-            console.warn("Autoplay was prevented by the browser.", error);
-        });
-    }
-  }, [result.audio]);
+      audioRef.current.src = result.audio;
+      audioRef.current.muted = isMuted;
 
-  const playAudio = () => {
-    // The user can always click to play.
-    audioRef.current?.play().catch(e => console.error("Audio playback failed on click:", e));
+      // Autoplay if not muted
+      if (!isMuted) {
+        audioRef.current.play().catch(error => {
+          console.warn("Autoplay was prevented by the browser.", error);
+        });
+      }
+    }
+  }, [result.audio, isMuted]); // Re-run if audio source changes or mute state changes
+
+  const toggleMute = () => {
+    const newMutedState = !isMuted;
+    setIsMuted(newMutedState);
+    if (audioRef.current) {
+      audioRef.current.muted = newMutedState;
+      // If unmuting and audio is paused, play it.
+      if (!newMutedState && audioRef.current.paused) {
+        audioRef.current.play().catch(e => console.error("Audio playback failed on toggle:", e));
+      }
+    }
   }
 
   const hasDealers = result.dealers && result.dealers.length > 0;
@@ -51,8 +62,8 @@ export default function DiagnosisResultComponent({ result, onReset }: DiagnosisR
                 <CardDescription>{t('aiDiagnosisResult')}</CardDescription>
               </div>
               {result.audio && (
-                <Button variant="ghost" size="icon" onClick={playAudio} aria-label="Play diagnosis audio">
-                  <Volume2 className="h-6 w-6 text-primary" />
+                <Button variant="ghost" size="icon" onClick={toggleMute} aria-label={isMuted ? "Unmute audio" : "Mute audio"}>
+                  {isMuted ? <VolumeX className="h-6 w-6 text-muted-foreground" /> : <Volume2 className="h-6 w-6 text-primary" />}
                 </Button>
               )}
             </div>
@@ -101,8 +112,8 @@ export default function DiagnosisResultComponent({ result, onReset }: DiagnosisR
             {t('diagnoseAnotherPlant')}
           </Button>
         </div>
-        {/* The autoPlay attribute is key for the initial playback. `controls` can be added for debugging. */}
-        {result.audio && <audio ref={audioRef} src={result.audio} autoPlay className="hidden" />}
+        {/* Hidden audio element */}
+        {result.audio && <audio ref={audioRef} className="hidden" />}
       </div>
       {hasDealers && (
         <AgroDealerModal
