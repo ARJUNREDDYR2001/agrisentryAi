@@ -1,13 +1,11 @@
 # AgriSentryAI
 _Your AI-Powered, Climate-Aware Farm Guardian_
 
-AgriSentryAI is a web application designed to empower smallholder farmers in India by providing them with advanced, AI-driven tools for crop protection. It tackles the critical challenges of timely disease diagnosis, resource accessibility, and the growing impact of climate change on agriculture.
+**[🚀 View Live Demo](https://agrisentryai.netlify.app/)**
 
 ---
 
-## 🚩 The Problem
-
-Smallholder farmers face immense pressure from pests, diseases, and unpredictable weather patterns, which can devastate crop yields. Access to timely, accurate information and resources is often limited, leading to significant financial losses and food insecurity. AgriSentryAI bridges this gap with a user-friendly, mobile-first platform that acts as a digital agronomist in the farmer's pocket.
+AgriSentryAI is a web application designed to empower smallholder farmers in India by providing them with advanced, AI-driven tools for crop protection. It tackles the critical challenges of timely disease diagnosis, resource accessibility, and the growing impact of climate change on agriculture.
 
 ## ✨ Key Features
 
