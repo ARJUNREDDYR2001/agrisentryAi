@@ -21,9 +21,14 @@ export default function DiagnosisResultComponent({ result, onReset }: DiagnosisR
   useEffect(() => {
     if (result.audio && audioRef.current) {
       audioRef.current.src = result.audio;
-      audioRef.current.play().catch(e => console.error("Audio playback failed:", e));
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error("Audio playback failed:", error);
+        });
+      }
     }
-  }, [result.audio]);
+  }, [result]);
 
   const playAudio = () => {
     audioRef.current?.play().catch(e => console.error("Audio playback failed:", e));
