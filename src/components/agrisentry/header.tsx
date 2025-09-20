@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import LeafLogo from "@/components/icons/leaf-logo";
-import { Globe, Info } from "lucide-react";
+import { Globe } from "lucide-react";
 import { useLocale } from "@/context/locale-context";
 import { Button } from "../ui/button";
 import AboutModal from "./about-modal";
@@ -23,7 +23,6 @@ export default function Header() {
           </div>
           <div className="flex items-center gap-4">
             <Button variant="ghost" onClick={() => setIsAboutModalOpen(true)}>
-              <Info className="mr-2 h-4 w-4"/>
               {t('about')}
             </Button>
             <div className="flex items-center gap-2">
