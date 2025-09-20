@@ -1,3 +1,8 @@
-{
-  "placeholderImages": []
-}
+{"placeholderImages": [
+    {
+      "id": "farm-background",
+      "description": "A lush green farm field under a clear sky.",
+      "imageUrl": "https://picsum.photos/seed/farm/1920/1080",
+      "imageHint": "farm field"
+    }
+]}
