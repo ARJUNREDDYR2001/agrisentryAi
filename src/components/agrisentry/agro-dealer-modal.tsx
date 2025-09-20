@@ -7,6 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useLocale } from "@/context/locale-context";
 import { MapPin, Phone } from "lucide-react";
 
 const dealers = [
@@ -16,18 +17,20 @@ const dealers = [
 ];
 
 export default function AgroDealerModal() {
+  const { t } = useLocale();
+
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline" className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
-          <MapPin className="mr-2 h-4 w-4" /> Find Nearest Agro-Dealers
+          <MapPin className="mr-2 h-4 w-4" /> {t('findNearestAgroDealers')}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="font-headline text-primary">Nearby Agro-Dealers</DialogTitle>
+          <DialogTitle className="font-headline text-primary">{t('nearbyAgroDealers')}</DialogTitle>
           <DialogDescription>
-            Contact these dealers for supplies and support.
+            {t('agroDealerDescription')}
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">

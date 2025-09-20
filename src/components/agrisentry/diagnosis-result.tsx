@@ -8,6 +8,7 @@ import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import AgroDealerModal from './agro-dealer-modal';
 import { AlertCircle, CheckCircle, RefreshCw, Volume2 } from 'lucide-react';
+import { useLocale } from '@/context/locale-context';
 
 type DiagnosisResultProps = {
   result: DiagnosisResult;
@@ -15,6 +16,7 @@ type DiagnosisResultProps = {
 };
 
 export default function DiagnosisResultComponent({ result, onReset }: DiagnosisResultProps) {
+  const { t } = useLocale();
   const confidenceColor = result.confidence > 70 ? 'bg-primary' : result.confidence > 40 ? 'bg-yellow-500' : 'bg-destructive';
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -42,7 +44,7 @@ export default function DiagnosisResultComponent({ result, onReset }: DiagnosisR
           <div className="flex justify-between items-start">
             <div>
               <CardTitle className="font-headline text-2xl text-primary">{result.disease}</CardTitle>
-              <CardDescription>AI Diagnosis Result</CardDescription>
+              <CardDescription>{t('aiDiagnosisResult')}</CardDescription>
             </div>
             {result.audio && (
               <Button variant="ghost" size="icon" onClick={playAudio} aria-label="Play diagnosis audio">
@@ -54,30 +56,30 @@ export default function DiagnosisResultComponent({ result, onReset }: DiagnosisR
         <CardContent className="space-y-4">
           <div>
             <div className="flex justify-between items-center mb-1">
-              <span className="text-sm font-medium text-muted-foreground">Confidence</span>
+              <span className="text-sm font-medium text-muted-foreground">{t('confidence')}</span>
               <span className="text-sm font-bold">{result.confidence}%</span>
             </div>
             <Progress value={result.confidence} indicatorClassName={confidenceColor} />
           </div>
 
           <div>
-            <h4 className="text-sm font-medium text-muted-foreground mb-2">Climate-Smart Advice</h4>
+            <h4 className="text-sm font-medium text-muted-foreground mb-2">{t('climateSmartAdvice')}</h4>
             <p className="text-lg font-semibold p-3 bg-accent/10 rounded-md border border-accent/20">
               "{result.advice}"
             </p>
           </div>
 
           <div>
-            <h4 className="text-sm font-medium text-muted-foreground mb-2">Micro-Insurance</h4>
+            <h4 className="text-sm font-medium text-muted-foreground mb-2">{t('microInsurance')}</h4>
             {result.insurance_eligible ? (
               <Badge variant="default" className="bg-accent text-accent-foreground">
                 <CheckCircle className="mr-2 h-4 w-4" />
-                Eligible for Claim
+                {t('eligibleForClaim')}
               </Badge>
             ) : (
               <Badge variant="secondary">
                 <AlertCircle className="mr-2 h-4 w-4" />
-                Not Eligible
+                {t('notEligible')}
               </Badge>
             )}
           </div>
@@ -88,7 +90,7 @@ export default function DiagnosisResultComponent({ result, onReset }: DiagnosisR
         <AgroDealerModal />
         <Button variant="outline" onClick={onReset} className="w-full">
           <RefreshCw className="mr-2 h-4 w-4" />
-          Diagnose Another Plant
+          {t('diagnoseAnotherPlant')}
         </Button>
       </div>
       {/* The autoPlay attribute is key for the initial playback. `controls` can be added for debugging. */}

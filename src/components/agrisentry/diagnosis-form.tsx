@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Upload, Camera, ImageIcon, RefreshCcw } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { useLocale } from '@/context/locale-context';
 
 type DiagnosisFormProps = {
   onSubmit: (formData: FormData) => Promise<void>;
@@ -22,6 +23,7 @@ export default function DiagnosisForm({ onSubmit }: DiagnosisFormProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const { toast } = useToast();
+  const { t } = useLocale();
 
   useEffect(() => {
     if (showCamera) {
@@ -38,8 +40,8 @@ export default function DiagnosisForm({ onSubmit }: DiagnosisFormProps) {
           setHasCameraPermission(false);
           toast({
             variant: 'destructive',
-            title: 'Camera Access Denied',
-            description: 'Please enable camera permissions in your browser settings.',
+            title: t('cameraAccessRequired'),
+            description: t('cameraAccessDescription'),
           });
         }
       };
@@ -54,7 +56,7 @@ export default function DiagnosisForm({ onSubmit }: DiagnosisFormProps) {
         }
       }
     }
-  }, [showCamera, toast]);
+  }, [showCamera, toast, t]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -111,18 +113,18 @@ export default function DiagnosisForm({ onSubmit }: DiagnosisFormProps) {
         </div>
         {hasCameraPermission === false && (
             <Alert variant="destructive">
-                <AlertTitle>Camera Access Required</AlertTitle>
+                <AlertTitle>{t('cameraAccessRequired')}</AlertTitle>
                 <AlertDescription>
-                Please allow camera access in your browser settings to use this feature.
+                {t('cameraAccessDescription')}
                 </AlertDescription>
             </Alert>
         )}
         <div className="w-full flex justify-center gap-4">
             <Button onClick={handleCapture} disabled={hasCameraPermission !== true} className="w-full md:w-1/2 bg-primary text-primary-foreground hover:bg-primary/90">
-                <Camera className="mr-2" /> Capture
+                <Camera className="mr-2" /> {t('capture')}
             </Button>
             <Button variant="outline" onClick={() => setShowCamera(false)} className="w-full md:w-1/2">
-                Cancel
+                {t('cancel')}
             </Button>
         </div>
       </div>
@@ -152,7 +154,7 @@ export default function DiagnosisForm({ onSubmit }: DiagnosisFormProps) {
               size="icon"
               onClick={resetSelection}
               className="absolute -top-3 -right-3 rounded-full z-10"
-              aria-label="Remove image"
+              aria-label={t('removeImage')}
             >
               <RefreshCcw className="h-4 w-4" />
             </Button>
@@ -160,7 +162,7 @@ export default function DiagnosisForm({ onSubmit }: DiagnosisFormProps) {
       ) : (
          <div className="w-full h-64 border-2 border-dashed border-border rounded-lg flex flex-col items-center justify-center gap-4 p-4">
              <Button type="button" variant="outline" className="w-full md:w-3/4" onClick={() => fileInputRef.current?.click()}>
-                <ImageIcon className="mr-2" /> Upload from Gallery
+                <ImageIcon className="mr-2" /> {t('uploadFromGallery')}
              </Button>
              <div className="flex items-center w-full md:w-3/4">
                 <div className="flex-grow border-t border-muted-foreground/50"></div>
@@ -168,14 +170,14 @@ export default function DiagnosisForm({ onSubmit }: DiagnosisFormProps) {
                 <div className="flex-grow border-t border-muted-foreground/50"></div>
             </div>
              <Button type="button" className="w-full md:w-3/4" onClick={() => setShowCamera(true)}>
-                <Camera className="mr-2" /> Use Live Camera
+                <Camera className="mr-2" /> {t('useLiveCamera')}
              </Button>
          </div>
       )}
 
       <Button type="submit" disabled={!imageFile} className="w-full md:w-1/2 bg-primary text-primary-foreground hover:bg-primary/90">
         <Upload className="mr-2 h-4 w-4" />
-        Diagnose Plant
+        {t('diagnosePlant')}
       </Button>
     </form>
   );

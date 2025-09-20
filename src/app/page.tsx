@@ -14,6 +14,7 @@ import DiagnosisLoadingSkeleton from '@/components/agrisentry/diagnosis-loading-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Leaf, Stethoscope } from 'lucide-react';
 import PreventiveGuidance from '@/components/agrisentry/preventive-guidance';
+import { useLocale } from '@/context/locale-context';
 
 
 type WeatherData = {
@@ -27,15 +28,17 @@ export default function AgriSentryDashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [weather, setWeather] = useState<WeatherData>({ temperature: 0, humidity: 0, rainForecast: '' });
   const { toast } = useToast();
+  const { t } = useLocale();
 
   useEffect(() => {
     // Simulate fetching weather data
+    const rainForecasts = [t('noRain'), t('lightShowers'), t('chanceOfThunderstorms')];
     setWeather({
       temperature: Math.floor(Math.random() * (35 - 25 + 1)) + 25, // Simulate temps between 25-35°C
       humidity: Math.floor(Math.random() * (90 - 60 + 1)) + 60, // Simulate humidity between 60-90%
-      rainForecast: ['No rain', 'Light showers expected', 'Chance of thunderstorms'][Math.floor(Math.random() * 3)],
+      rainForecast: rainForecasts[Math.floor(Math.random() * 3)],
     });
-  }, []);
+  }, [t]);
 
   const handleReset = () => {
     setResult(null);
@@ -59,7 +62,7 @@ export default function AgriSentryDashboard() {
     } else if (error) {
       toast({
         variant: "destructive",
-        title: "Diagnosis Failed",
+        title: t('diagnosisFailed'),
         description: error,
       });
     }
@@ -81,18 +84,18 @@ export default function AgriSentryDashboard() {
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="diagnosis">
                   <Stethoscope className="mr-2 h-4 w-4"/>
-                  Diagnosis
+                  {t('diagnosis')}
                 </TabsTrigger>
                 <TabsTrigger value="prevention">
                   <Leaf className="mr-2 h-4 w-4"/>
-                  Preventive Guidance
+                  {t('preventiveGuidance')}
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="diagnosis">
                 <Card className="h-full shadow-lg">
                   <CardHeader>
-                    <CardTitle className="font-headline text-3xl text-primary">Disease Diagnosis</CardTitle>
-                    <CardDescription>Upload a photo of the affected plant to get an AI-powered diagnosis.</CardDescription>
+                    <CardTitle className="font-headline text-3xl text-primary">{t('diseaseDiagnosis')}</CardTitle>
+                    <CardDescription>{t('diseaseDiagnosisDescription')}</CardDescription>
                   </CardHeader>
                   <CardContent className="min-h-[400px]">
                     {isLoading ? (
@@ -113,7 +116,7 @@ export default function AgriSentryDashboard() {
         </div>
       </main>
       <footer className="text-center p-4 text-muted-foreground text-sm">
-        <p>AgriSentryAI &copy; {new Date().getFullYear()} - Your Climate-Aware Farm Guardian</p>
+        <p>AgriSentryAI &copy; {new Date().getFullYear()} - {t('appTagline')}</p>
       </footer>
     </div>
   );
