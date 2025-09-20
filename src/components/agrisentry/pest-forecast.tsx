@@ -6,7 +6,7 @@ import { runForecast } from '@/app/actions';
 import type { PestAndDiseaseForecast } from '@/ai/flows/get-pest-disease-forecast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from '../ui/button';
-import { AlertTriangle, Bug, LoaderCircle, ShieldAlert, Sprout } from 'lucide-react';
+import { AlertTriangle, Bug, LoaderCircle, ShieldAlert, Sprout, Telescope } from 'lucide-react';
 import { Progress } from '../ui/progress';
 import { Skeleton } from '../ui/skeleton';
 
