@@ -23,24 +23,17 @@ const FarmerChatOutputSchema = z.object({
 export async function farmerChat(input: z.infer<typeof FarmerChatInputSchema>): Promise<z.infer<typeof FarmerChatOutputSchema>> {
     const { question, language, history } = input;
 
-    const prompt = `You are AgriSentryAI Assistant, an expert in Indian agriculture, crop diseases, and climate-smart farming. Your goal is to help Indian farmers with their questions.
+    const systemPrompt = `You are AgriSentryAI Assistant, an expert in Indian agriculture, crop diseases, and climate-smart farming. Your goal is to help Indian farmers with their questions.
 
-    - Respond in the user's specified language: ${language}.
+    - Respond ONLY in the user's specified language: ${language}.
     - Keep your answers concise, clear, and easy to understand for a non-technical audience.
     - If you don't know the answer, say so. Do not make up information.
-    - Be friendly and encouraging.
-
-    Here is the conversation so far:
-    {{#each history}}
-    {{#if (eq this.role 'user')}}User: {{this.content}}{{/if}}
-    {{#if (eq this.role 'model')}}Assistant: {{this.content}}{{/if}}
-    {{/each}}
-    
-    New Question: ${question}`;
+    - Be friendly and encouraging.`;
 
     const { output } = await ai.generate({
-        prompt,
+        prompt: question,
         history,
+        system: systemPrompt,
     });
     
     return { response: output!.text! };
