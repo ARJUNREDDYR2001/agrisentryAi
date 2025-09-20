@@ -66,5 +66,14 @@
   "forecastError": "Failed to get a forecast. Please try again later.",
   "riskScore": "Risk Score",
   "recommendation": "Recommendation",
-  "noSignificantRisks": "AI analysis shows no significant outbreak risks for the selected crop under current weather conditions."
+  "noSignificantRisks": "AI analysis shows no significant outbreak risks for the selected crop under current weather conditions.",
+  "about": "About",
+  "aboutTitle": "About AgriSentryAI",
+  "aboutDescription": "An AI-powered climate-aware farm guardian, built for the modern farmer.",
+  "projectHighlights": "Project Highlights",
+  "developedBy": "Developed By",
+  "featureDiagnosis": "Instant AI disease diagnosis from a photo.",
+  "featureForecast": "Predictive pest & disease outbreak forecasting.",
+  "featureChatbot": "Multi-lingual AI assistant for farming questions.",
+  "featureInsurance": "Climate-linked micro-insurance eligibility check."
 }
