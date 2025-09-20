@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useLocale } from "@/context/locale-context";
-import { Award, Bot, Cpu, Github, Linkedin, Mail, Telescope } from "lucide-react";
+import { Award, Bot, Cpu, Github, Linkedin, Mail, Phone, Telescope } from "lucide-react";
 import LeafLogo from "../icons/leaf-logo";
 
 type AboutModalProps = {
@@ -59,9 +59,18 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
                     <p className="text-sm text-muted-foreground">Karnataka</p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <a href="mailto:arjunredyr2001@gmail.com" target="_blank" rel="noopener noreferrer">
-                        <Button variant="outline" size="icon">
-                            <Mail className="h-4 w-4" />
+                    <a href="mailto:arjunredyr2001@gmail.com">
+                        <Button variant="outline" size="icon" asChild>
+                           <div>
+                             <Mail className="h-4 w-4" />
+                           </div>
+                        </Button>
+                    </a>
+                     <a href="tel:9380724044">
+                        <Button variant="outline" size="icon" asChild>
+                           <div>
+                            <Phone className="h-4 w-4" />
+                           </div>
                         </Button>
                     </a>
                 </div>
