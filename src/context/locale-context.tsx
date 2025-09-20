@@ -7,8 +7,9 @@ import hi from '@/locales/hi.json';
 import mr from '@/locales/mr.json';
 import ta from '@/locales/ta.json';
 import te from '@/locales/te.json';
+import kn from '@/locales/kn.json';
 
-const translations = { en, hi, mr, ta, te };
+const translations = { en, hi, mr, ta, te, kn };
 
 type Locale = keyof typeof translations;
 

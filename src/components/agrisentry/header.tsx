@@ -17,7 +17,7 @@ export default function Header() {
         </div>
         <div className="flex items-center gap-2">
           <Globe className="h-5 w-5 text-muted-foreground" />
-          <Select value={locale} onValueChange={(value) => setLocale(value as 'en' | 'hi' | 'mr' | 'ta' | 'te')}>
+          <Select value={locale} onValueChange={(value) => setLocale(value as 'en' | 'hi' | 'mr' | 'ta' | 'te' | 'kn')}>
             <SelectTrigger className="w-[120px]">
               <SelectValue placeholder={t('language')} />
             </SelectTrigger>
@@ -27,6 +27,7 @@ export default function Header() {
               <SelectItem value="mr">मराठी</SelectItem>
               <SelectItem value="ta">தமிழ்</SelectItem>
               <SelectItem value="te">తెలుగు</SelectItem>
+              <SelectItem value="kn">ಕನ್ನಡ</SelectItem>
             </SelectContent>
           </Select>
         </div>

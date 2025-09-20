@@ -18,7 +18,7 @@ export default function WeatherWidget({ weather }: WeatherWidgetProps) {
   const isLoading = weather.temperature === 0;
   
   const getForecastIcon = () => {
-    if (weather.rainForecast.toLowerCase().includes('rain') || weather.rainForecast.toLowerCase().includes('showers') || weather.rainForecast.toLowerCase().includes('thunderstorms') || weather.rainForecast.includes('सरींची') || weather.rainForecast.includes('மழை') || weather.rainForecast.includes('వర్షం')) {
+    if (weather.rainForecast.toLowerCase().includes('rain') || weather.rainForecast.toLowerCase().includes('showers') || weather.rainForecast.toLowerCase().includes('thunderstorms') || weather.rainForecast.includes('सरींची') || weather.rainForecast.includes('மழை') || weather.rainForecast.includes('వర్షం') || weather.rainForecast.includes('ಮಳೆ')) {
       return <CloudRain className="h-6 w-6 text-blue-400" />;
     }
     return <Sun className="h-6 w-6 text-yellow-400" />;

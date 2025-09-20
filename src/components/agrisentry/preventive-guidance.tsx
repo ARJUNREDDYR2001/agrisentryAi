@@ -27,7 +27,7 @@ export default function PreventiveGuidance({ weather }: PreventiveGuidanceProps)
       });
     }
   
-    if (rainForecast.toLowerCase().includes('rain') || rainForecast.toLowerCase().includes('showers') || rainForecast.includes('सरींची') || rainForecast.includes('மழை') || rainForecast.includes('వర్షం')) {
+    if (rainForecast.toLowerCase().includes('rain') || rainForecast.toLowerCase().includes('showers') || rainForecast.includes('सरींची') || rainForecast.includes('மழை') || rainForecast.includes('వర్షం') || rainForecast.includes('ಮಳೆ')) {
       adviceList.push({
         Icon: CloudDrizzle,
         title: t('rainForecasted'),
