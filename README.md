@@ -1,7 +1,7 @@
 # AgriSentryAI
 _Your AI-Powered, Climate-Aware Farm Guardian_
 
-**[🚀 View Live Demo](https://agrisentryai.netlify.app/)**
+**[🚀 View Live Demo](https://agrisentryai.netlify.app/)** -**https://agrisentryai.netlify.app/**
 
 ---
 
